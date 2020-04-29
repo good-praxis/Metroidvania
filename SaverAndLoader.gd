@@ -1,9 +1,13 @@
 extends Node
 
+var PlayerStats = ResourceLoader.PlayerStats
+
 var custom_data =  {
 	missiles_unlocked = false,
 	boss_defeated = false,
-	gun_broken = false
+	gun_broken = false,
+	save_on_broken_save_station = false,
+	saved_health = PlayerStats.max_health
 }
 
 var is_loading := false

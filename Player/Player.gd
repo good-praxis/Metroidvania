@@ -54,6 +54,8 @@ func _ready():
 	PlayerStats.connect("player_died", self, "_on_died")
 	PlayerStats.missiles_unlocked = SaverAndLoader.custom_data.missiles_unlocked
 	PlayerStats.gun_broken = SaverAndLoader.custom_data.gun_broken
+	if SaverAndLoader.custom_data.save_on_broken_save_station:
+		PlayerStats.health = SaverAndLoader.custom_data.saved_health
 	MainInstances.Player = self
 	call_deferred("assign_world_camera")
 	
@@ -112,7 +114,7 @@ func save() -> Dictionary:
 		"filename" : get_filename(),
 		"parent" : get_parent().get_path(),
 		"position_x" : position.x,
-		"position_y" : position.y
+		"position_y" : position.y,
 	}
 	return save_dictionary
 

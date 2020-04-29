@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/SaveStation.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Levels/Level_04.gd" type="Script" id=5]
 [ext_resource path="res://World/Trigger.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World/TileMap.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/BrokenSaveStation.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Enemies/PlantEnemy.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 16 )
@@ -18,7 +20,7 @@ script = ExtResource( 5 )
 tile_data = PoolIntArray( 0, 0, 0, 1, 0, 1, 2, 0, 1, 3, 0, 1, 4, 0, 1, 5, 0, 1, 6, 0, 1, 7, 0, 1, 8, 0, 1, 9, 0, 1, 10, 0, 1, 11, 0, 1, 12, 0, 2, 65536, 0, 65540, 65537, 0, 131073, 65538, 0, 131073, 65539, 0, 131073, 65540, 0, 131073, 65541, 0, 131073, 65542, 0, 131073, 65543, 0, 131073, 65544, 0, 131073, 65545, 0, 131073, 65546, 0, 131073, 65547, 0, 131073, 65548, 0, 65543, 131072, 0, 65539, 131084, 0, 65539, 196608, 0, 131075, 196620, 0, 131075, 327685, 1, 0, 327686, 536870912, 1, 327687, 0, 1, 327688, 2, 6, 393216, 0, 0, 393217, 0, 1, 393218, 0, 1, 393219, 0, 1, 393220, 0, 1, 393221, 1, 5, 393222, 0, 65537, 393223, 0, 65537, 393224, 2, 1, 393225, 0, 1, 393226, 0, 1, 393227, 0, 1, 393228, 0, 2, 458752, 0, 131072, 458753, 0, 131073, 458754, 0, 131073, 458755, 0, 131073, 458756, 0, 131073, 458757, 0, 131073, 458758, 0, 131073, 458759, 0, 131073, 458760, 0, 131073, 458761, 0, 131073, 458762, 0, 131073, 458763, 0, 131073, 458764, 0, 131074 )
 
 [node name="SaveStation" parent="." index="1" instance=ExtResource( 2 )]
-position = Vector2( 112, 80 )
+position = Vector2( 49, 96 )
 
 [node name="Door" parent="." index="2" instance=ExtResource( 4 )]
 position = Vector2( 8, 80 )
@@ -37,6 +39,13 @@ shape = SubResource( 1 )
 visible = false
 collision_layer = 0
 tile_data = PoolIntArray( 262144, 0, 3, 327680, 0, 131075 )
+
+[node name="BrokenSaveStation" parent="." index="5" instance=ExtResource( 8 )]
+position = Vector2( 113, 80 )
+
+[node name="PlantEnemy" parent="." index="6" instance=ExtResource( 9 )]
+position = Vector2( 168, 32 )
+rotation = 3.14159
 [connection signal="area_triggered" from="Trigger" to="." method="_on_Trigger_area_triggered"]
 
 [editable path="Trigger"]
