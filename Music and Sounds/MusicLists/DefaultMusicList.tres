@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Music and Sounds/MusicList.gd" type="Script" id=1]
+[ext_resource path="res://Music and Sounds/Music.ogg" type="AudioStream" id=2]
+
+[resource]
+script = ExtResource( 1 )
+list = [ ExtResource( 2 ) ]
+volume_db_modifier = 0
