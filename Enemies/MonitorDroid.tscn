@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/MonitorDroid.png" type="Texture" id=2]
@@ -21,7 +21,7 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "Test animation"
 length = 7.0
 loop = true
@@ -39,8 +39,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Hover"
+[sub_resource type="Animation" id=3]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -68,9 +67,14 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 11, 14 )
+
 [node name="MonitorDroid" instance=ExtResource( 1 )]
+scale = Vector2( 0.5, 0.5 )
 
 [node name="Sprite" parent="." index="0"]
+z_index = -1
 texture = ExtResource( 2 )
 hframes = 2
 
@@ -93,13 +97,22 @@ __meta__ = {
 texture = ExtResource( 3 )
 vframes = 3
 hframes = 6
-frame = 14
+frame = 13
 
 [node name="AnimationPlayer" parent="." index="2"]
 autoplay = "Test animation"
 playback_speed = 1.5
-"anims/Test animation" = SubResource( 3 )
+"anims/Test animation" = SubResource( 2 )
 
 [node name="HoverAnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 autoplay = "Hover"
-anims/Hover = SubResource( 2 )
+anims/Hover = SubResource( 3 )
+
+[node name="Collider" parent="Hurtbox" index="0"]
+position = Vector2( 0, 1 )
+shape = SubResource( 4 )
+
+[node name="EnemyStats" parent="." index="5"]
+MAX_HEALTH = 50
+
+[editable path="Hurtbox"]
