@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/TargetDrone.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/TargetDrone.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Animate"
+length = 2.0
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "emit_dust"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.00709891, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 2 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 8.0
+
+[node name="TargetDrone" instance=ExtResource( 1 )]
+collision_mask = 0
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 0, 0.882546 )
+z_index = -1
+texture = ExtResource( 2 )
+offset = Vector2( 0, 0.00737518 )
+
+[node name="AnimationPlayer" parent="." index="2"]
+autoplay = "Animate"
+anims/Animate = SubResource( 1 )
+
+[node name="Collider" parent="Hurtbox" index="0"]
+position = Vector2( -1, 1 )
+shape = SubResource( 2 )
+
+[editable path="Hurtbox"]
