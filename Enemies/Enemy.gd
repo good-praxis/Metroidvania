@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
+const ENEMY_HURTBOX_BIT = 3
 
 export(int) var MAX_SPEED: = 15
 var motion: = Vector2.ZERO

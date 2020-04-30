@@ -1,7 +1,9 @@
 extends "res://Enemies/Enemy.gd"
 
-var MainInstances: MainInstances = ResourceLoader.MainInstances
+const PLAYER_HURTBOX_BIT = 2
 const Bullet = preload("res://Enemies/EnemyBullet.tscn")
+
+var MainInstances: MainInstances = ResourceLoader.MainInstances
 var awake: = true setget set_awake
 
 export(int) var ACCELERATION: = 70
@@ -9,6 +11,8 @@ export(int) var ACCELERATION: = 70
 onready var animationPlayer = $AnimationPlayer
 onready var rightWallCheck: = $RightWallCheck
 onready var leftWallCheck: = $LeftWallCheck
+onready var hurtbox: = $Hurtbox
+onready var hitbox: = $Hitbox
 
 signal died
 
@@ -44,6 +48,8 @@ func colliding_with_wall() -> bool:
 func set_awake(value):
 	visible = value
 	set_process(value)
+	hurtbox.set_collision_layer_bit(ENEMY_HURTBOX_BIT, value)
+	hitbox.set_collision_mask_bit(PLAYER_HURTBOX_BIT, value)
 	awake = value
 	
 
