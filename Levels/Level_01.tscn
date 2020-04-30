@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Levels/Level_01.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Enemies/TargetDrone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://DoorConnections/00_link_01.tres" type="Resource" id=5]
 [ext_resource path="res://World/TileMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Enemies/MonitorDrone.tscn" type="PackedScene" id=7]
 
 [node name="Level_01" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -70,3 +71,21 @@ scale = Vector2( 1, -1 )
 visible = false
 collision_layer = 0
 tile_data = PoolIntArray( 65546, 7, 0, 65547, 7, 0, 65548, 7, 0, 131082, 7, 0, 262157, 7, 0, 262158, 7, 0, 327694, 7, 0, 327697, 3, 16, 393233, 3, 131088 )
+
+[node name="MonitorDrone" parent="." index="10" groups=[
+"Monitor",
+] instance=ExtResource( 7 )]
+position = Vector2( 48, 45 )
+animated = true
+animation = "ShootTarget"
+
+[node name="MonitorDrone2" parent="." index="11" groups=[
+"Monitor",
+] instance=ExtResource( 7 )]
+position = Vector2( 251, 45 )
+animated = true
+animation = "ShootTarget"
+[connection signal="died" from="TargetDrone" to="MonitorDrone" method="_on_objective_cleared"]
+[connection signal="died" from="TargetDrone2" to="MonitorDrone" method="_on_objective_cleared"]
+[connection signal="died" from="TargetDrone5" to="MonitorDrone2" method="_on_objective_cleared"]
+[connection signal="died" from="TargetDrone6" to="MonitorDrone2" method="_on_objective_cleared"]
