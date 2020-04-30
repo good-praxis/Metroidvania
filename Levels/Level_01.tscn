@@ -1,31 +1,72 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=1]
-[ext_resource path="res://World/Door.tscn" type="PackedScene" id=2]
-[ext_resource path="res://DoorConnections/00_link_01.tres" type="Resource" id=3]
-[ext_resource path="res://DoorConnections/01_link_03.tres" type="Resource" id=4]
-[ext_resource path="res://World/SaveStation.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Enemies/CrawlingEnemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Levels/Level_01.gd" type="Script" id=2]
+[ext_resource path="res://World/Door.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Enemies/TargetDrone.tscn" type="PackedScene" id=4]
+[ext_resource path="res://DoorConnections/00_link_01.tres" type="Resource" id=5]
+[ext_resource path="res://World/TileMap.tscn" type="PackedScene" id=6]
 
 [node name="Level_01" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
 
 [node name="TileMap" parent="." index="0"]
-tile_data = PoolIntArray( -65536, 0, 0, -65535, 0, 1, -65534, 0, 1, -65533, 0, 1, -65532, 0, 1, -65531, 0, 1, -65530, 0, 1, -65529, 0, 1, -65528, 0, 1, -65527, 0, 2, 0, 0, 131072, 1, 0, 131073, 2, 0, 131073, 3, 0, 131073, 4, 0, 131073, 5, 0, 131073, 6, 0, 131073, 7, 0, 131073, 8, 0, 65542, 9, 0, 65538, 65544, 0, 65536, 65545, 0, 65538, 131080, 0, 65536, 131081, 0, 65538, 196608, 0, 0, 196609, 0, 1, 196610, 0, 1, 196611, 0, 1, 196612, 0, 1, 196613, 0, 2, 196616, 0, 65536, 196617, 0, 65538, 262144, 0, 131072, 262145, 0, 131073, 262146, 0, 131073, 262147, 0, 65542, 262148, 0, 65537, 262149, 0, 65538, 262152, 0, 65536, 262153, 0, 65538, 327683, 0, 65536, 327684, 0, 65537, 327685, 0, 65538, 327688, 0, 131072, 327689, 0, 131074, 393219, 0, 65536, 393220, 0, 65537, 393221, 0, 65538, 458755, 0, 65536, 458756, 0, 65537, 458757, 0, 65538, 524291, 0, 131072, 524292, 0, 131073, 524293, 0, 196613, 524294, 0, 196609, 524295, 0, 196609, 524296, 0, 196609, 524297, 0, 196610 )
+tile_data = PoolIntArray( 0, 5, 0, 1, 5, 131081, 2, 5, 1, 3, 5, 131081, 4, 5, 1, 5, 5, 1, 6, 5, 131081, 7, 5, 1, 8, 5, 131077, 9, 5, 1, 10, 5, 131081, 11, 5, 131081, 12, 5, 131081, 13, 5, 131077, 14, 5, 1, 15, 5, 1, 16, 5, 131081, 17, 5, 1, 18, 5, 65544, 65536, 5, 65536, 65537, 5, 12, 65538, 5, 5, 65539, 5, 5, 65540, 5, 5, 65541, 5, 131073, 65542, 5, 5, 65543, 5, 5, 65544, 5, 131073, 65545, 5, 131073, 65546, 5, 13, 65547, 5, 131073, 65548, 5, 5, 65549, 5, 13, 65550, 5, 131073, 65551, 5, 131073, 65552, 5, 131073, 65553, 5, 14, 65554, 5, 65540, 131072, 5, 65542, 131073, 5, 65540, 131082, 7, 0, 131089, 5, 65536, 131090, 5, 65540, 196608, 5, 65536, 196609, 5, 65538, 196625, 5, 65536, 196626, 5, 65540, 262144, 5, 65550, 262145, 5, 65548, 262157, 7, 0, 262158, 7, 0, 262161, 5, 65550, 262162, 5, 65548, 327694, 7, 0, 458752, 5, 65546, 458753, 5, 131077, 458754, 5, 1, 458755, 5, 1, 458756, 5, 1, 458757, 5, 1, 458758, 5, 131081, 458759, 5, 131081, 458760, 5, 131081, 458761, 5, 1, 458762, 5, 131081, 458763, 5, 131077, 458764, 5, 131077, 458765, 5, 131081, 458766, 5, 131077, 458767, 5, 1, 458768, 5, 131081, 458769, 5, 131077, 458770, 5, 2, 524288, 5, 65542, 524289, 5, 65537, 524290, 5, 65537, 524291, 5, 65537, 524292, 5, 65537, 524293, 5, 65537, 524294, 5, 65537, 524295, 5, 65537, 524296, 5, 65537, 524297, 5, 65537, 524298, 5, 65537, 524299, 5, 65537, 524300, 5, 65537, 524301, 5, 65537, 524302, 5, 65537, 524303, 5, 65537, 524304, 5, 65537, 524305, 5, 65537, 524306, 5, 65538, 589824, 5, 65550, 589825, 5, 131073, 589826, 5, 131073, 589827, 5, 13, 589828, 5, 5, 589829, 5, 13, 589830, 5, 131073, 589831, 5, 131073, 589832, 5, 13, 589833, 5, 5, 589834, 5, 131073, 589835, 5, 13, 589836, 5, 13, 589837, 5, 131073, 589838, 5, 5, 589839, 5, 13, 589840, 5, 5, 589841, 5, 5, 589842, 5, 131074 )
 
-[node name="Door" parent="." index="1" instance=ExtResource( 2 )]
-position = Vector2( 8, 32 )
+[node name="Door" parent="." index="1" instance=ExtResource( 3 )]
+position = Vector2( 8, 96 )
 scale = Vector2( -1, 1 )
-connection = ExtResource( 3 )
+connection = ExtResource( 5 )
 new_level_path = "res://Levels/Level_00.tscn"
 
-[node name="Door2" parent="." index="2" instance=ExtResource( 2 )]
-position = Vector2( 152, 112 )
-connection = ExtResource( 4 )
-new_level_path = "res://Levels/Level_03.tscn"
+[node name="Door2" parent="." index="2" instance=ExtResource( 3 )]
+position = Vector2( 296, 96 )
+connection = ExtResource( 5 )
+new_level_path = "res://Levels/Level_00.tscn"
 
-[node name="SaveStation" parent="." index="3" instance=ExtResource( 5 )]
-position = Vector2( 80, 48 )
+[node name="TargetDrone" parent="." index="3" groups=[
+"Objective",
+] instance=ExtResource( 4 )]
+position = Vector2( 47, 68 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
 
-[node name="CrawlingEnemy" parent="." index="4" instance=ExtResource( 6 )]
-position = Vector2( 128, 73 )
-rotation = -1.5708
+[node name="TargetDrone2" parent="." index="4" groups=[
+"Objective",
+] instance=ExtResource( 4 )]
+position = Vector2( 81, 45 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+
+[node name="TargetDrone3" parent="." index="5" groups=[
+"Objective",
+] instance=ExtResource( 4 )]
+position = Vector2( 94, 100 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+
+[node name="TargetDrone4" parent="." index="6" groups=[
+"Objective",
+] instance=ExtResource( 4 )]
+position = Vector2( 137, 57 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+
+[node name="TargetDrone5" parent="." index="7" groups=[
+"Objective",
+] instance=ExtResource( 4 )]
+position = Vector2( 194, 49 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+
+[node name="TargetDrone6" parent="." index="8" groups=[
+"Objective",
+] instance=ExtResource( 4 )]
+position = Vector2( 249, 74 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+
+[node name="BlockDoor" parent="." index="9" instance=ExtResource( 6 )]
+visible = false
+collision_layer = 0
+tile_data = PoolIntArray( 65546, 7, 0, 65547, 7, 0, 65548, 7, 0, 131082, 7, 0, 262157, 7, 0, 262158, 7, 0, 327694, 7, 0, 327697, 3, 16, 393233, 3, 131088 )

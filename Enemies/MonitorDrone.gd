@@ -34,5 +34,4 @@ func update_sprite():
 	displaySprite.frame = sprite_id
 	
 func play_animation(anim = animation):
-
-	animationPlayer.play("GoRight")
+	animationPlayer.play(anim)

@@ -7,7 +7,8 @@ var custom_data =  {
 	boss_defeated = false,
 	gun_broken = false,
 	save_on_broken_save_station = false,
-	saved_health = PlayerStats.max_health
+	saved_health = PlayerStats.max_health,
+	level_01_cleared = false
 }
 
 var is_loading := false
