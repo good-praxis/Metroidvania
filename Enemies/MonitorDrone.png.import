@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MonitorDroid.png-d53858649211ba3b31adc17c940e8613.stex"
+path="res://.import/MonitorDrone.png-ea6ac4d61224478f189adf2430bba6e5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemies/MonitorDroid.png"
-dest_files=[ "res://.import/MonitorDroid.png-d53858649211ba3b31adc17c940e8613.stex" ]
+source_file="res://Enemies/MonitorDrone.png"
+dest_files=[ "res://.import/MonitorDrone.png-ea6ac4d61224478f189adf2430bba6e5.stex" ]
 
 [params]
 

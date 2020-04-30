@@ -4,7 +4,7 @@
 [ext_resource path="res://World/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://DoorConnections/00_link_01.tres" type="Resource" id=3]
 [ext_resource path="res://World/SaveStation.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Enemies/MonitorDroid.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Enemies/MonitorDrone.tscn" type="PackedScene" id=5]
 
 [node name="Level_00" instance=ExtResource( 1 )]
 
