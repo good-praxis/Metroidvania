@@ -87,5 +87,6 @@ animated = true
 animation = "ShootTarget"
 [connection signal="died" from="TargetDrone" to="MonitorDrone" method="_on_objective_cleared"]
 [connection signal="died" from="TargetDrone2" to="MonitorDrone" method="_on_objective_cleared"]
+[connection signal="died" from="TargetDrone3" to="MonitorDrone" method="_on_objective_cleared"]
 [connection signal="died" from="TargetDrone5" to="MonitorDrone2" method="_on_objective_cleared"]
 [connection signal="died" from="TargetDrone6" to="MonitorDrone2" method="_on_objective_cleared"]
