@@ -12,6 +12,9 @@ func _ready():
 	if SaverAndLoader.is_loading:
 		SaverAndLoader.load_game()
 		SaverAndLoader.is_loading = false
+		
+	if MainInstances.DebugHelper != null:
+		DebugHelper.prime_player()
 	
 	MainInstances.Player.connect("hit_door", self, "_on_Player_hit_door")
 	MainInstances.Player.connect("player_died", self, "_on_Player_died")
