@@ -5,6 +5,14 @@ var PlayerStats: PlayerStats = ResourceLoader.PlayerStats
 
 onready var currentLevel = get_current_level()
 
+func __dbg_level_switch(door):
+	if MainInstances.DebugHelper != null:
+		var DebugHelper = MainInstances.DebugHelper
+		var next_level = door.new_level_path.substr(13)
+		next_level = next_level.substr(0, len(next_level) - 5)
+		var info = "Transitioning from %s to %s" % [currentLevel.name, next_level]
+		DebugHelper.info(info)
+
 func _ready():
 	VisualServer.set_default_clear_color(Color.black)
 	Music.list_play()
@@ -22,6 +30,9 @@ func _ready():
 func change_levels(door):
 	if currentLevel == null:
 		push_warning("No current level found in World.gd")
+		
+	__dbg_level_switch(door)
+		
 	if door.new_level_path == "":
 		Events.emit_signal("screen_fade_out", 1)
 		PlayerStats.emit_signal("player_died")
