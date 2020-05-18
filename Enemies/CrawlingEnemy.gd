@@ -6,11 +6,16 @@ export(DIRECTION) var WALKING_DIRECTION = DIRECTION.RIGHT
 
 onready var floorCast = $FloorCast
 onready var wallCast = $WallCast
+onready var doorCast = $DoorCast
 
 func _ready():
 	wallCast.cast_to.x *= WALKING_DIRECTION
+	doorCast.cast_to.x *= WALKING_DIRECTION
 
 func _physics_process(delta):
+	if doorCast.is_colliding():
+		switch_walking_direction()
+	
 	if wallCast.is_colliding():
 		global_position = wallCast.get_collision_point()
 		var normal = wallCast.get_collision_normal()
@@ -23,3 +28,9 @@ func _physics_process(delta):
 			rotation = normal.rotated(deg2rad(90)).angle()
 		else:
 			rotation_degrees += 20 * WALKING_DIRECTION
+
+
+func switch_walking_direction():
+	WALKING_DIRECTION *= -1
+	wallCast.cast_to.x *= -1
+	doorCast.cast_to.x *= -1
