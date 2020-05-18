@@ -141,9 +141,6 @@ func _physics_process(delta) -> void:
 			fire_missile()
 			PlayerStats.missiles -= 1
 			
-	# TODO: REMOVE
-	if Input.is_action_just_pressed("tmp_break"):
-		PlayerStats.set_gun_broken(!PlayerStats.gun_broken)
 		
 	
 func assign_world_camera():
@@ -313,6 +310,7 @@ func submerged_check():
 		waterEntryCollider.disabled = false
 		waterExitCollider.disabled = true
 		state = MOVE
+		
 		
 func wall_slide_jump_check(wall_axis):
 	if Input.is_action_just_pressed("ui_up"):
