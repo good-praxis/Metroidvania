@@ -1,8 +1,9 @@
 extends Node
 
 var MainInstances: MainInstances = ResourceLoader.MainInstances
+var PlayerStats: PlayerStats = ResourceLoader.PlayerStats
 
-onready var currentLevel: = $Level_00
+onready var currentLevel = get_current_level()
 
 func _ready():
 	VisualServer.set_default_clear_color(Color.black)
@@ -16,6 +17,13 @@ func _ready():
 	MainInstances.Player.connect("player_died", self, "_on_Player_died")
 	
 func change_levels(door):
+	if currentLevel == null:
+		push_warning("No current level found in World.gd")
+	if door.new_level_path == "":
+		Events.emit_signal("screen_fade_out", 1)
+		PlayerStats.emit_signal("player_died")
+		return
+		
 	var offset = currentLevel.position
 	currentLevel.queue_free()
 	var NewLevel = load(door.new_level_path)
@@ -31,6 +39,11 @@ func get_door_with_connection(notDoor, connection):
 		if door.connection == connection and door != notDoor:
 			return door
 	return null
+
+func get_current_level():
+	for child in get_children():
+		if child.is_in_group("Level"):
+			return child
 
 func _on_Player_hit_door(door):
 	call_deferred("change_levels", door)

@@ -33,7 +33,7 @@ func chase_player(delta):
 		rotation_degrees = lerp(rotation_degrees, (motion.x / MAX_SPEED) * 10, 0.3)
 		
 		if colliding_with_wall():
-			motion.x *= -0.5
+			motion.x *= -0.7
 			
 func fire_bullet() -> void:
 	var bullet = Utils.instance_scene_on_main(Bullet, global_position)

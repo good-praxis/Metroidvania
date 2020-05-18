@@ -20,12 +20,20 @@ export (int) var MAX_SLOPE_ANGLE: = 46
 export (int) var BULLET_SPEED: = 250
 export (int) var MISSILE_BULLET_SPEED: = 150
 
+export (float) var SUBMERGED_ACCELERATION: = 1.5
+export (float) var SUBMERGED_MAX_SPEED: = .7
+export (float) var SUBMERGED_JUMP_FORCE: = .5
+export (float) var SUBMERGED_GRAVITY: = .2
+export (float) var SUBMERGED_SINKING_GRAVITY: = .4
+
 enum {
 	MOVE,
-	WALL_SLIDE
+	WALL_SLIDE,
+	KNOCKED_OUT,
+	SUBMERGED
 }
 
-var state: = MOVE
+var state:  = MOVE
 var invincible: = false setget set_invincible
 var motion: = Vector2.ZERO
 var snap_vector: = Vector2.ZERO
@@ -41,6 +49,9 @@ onready var gun: = $Sprite/PlayerGun
 onready var muzzle: = $Sprite/PlayerGun/Sprite/Muzzle
 onready var powerupDetector: = $PowerupDetector
 onready var cameraFollow: = $CameraFollow
+onready var waterDetector: = $WaterDetector
+onready var waterEntryCollider: = $WaterDetector/EntryCollider
+onready var waterExitCollider: = $WaterDetector/ExitCollider
 
 # warning-ignore:unused_signal
 signal hit_door(door)
@@ -48,6 +59,7 @@ signal player_died()
 
 func set_invincible(value):
 	invincible = value
+	
 	
 func _ready():
 # warning-ignore:return_value_discarded
@@ -78,6 +90,20 @@ func _physics_process(delta) -> void:
 			update_animations(input_vector)
 			move()
 			wall_slide_check()
+			submerged_check()
+			
+		SUBMERGED:
+			var input_vector: = get_input_vector()
+			apply_horizontal_force(input_vector, delta)
+			apply_friction(input_vector)
+			update_snap_vector()
+			jump_check()
+			apply_gravity(delta)
+			update_animations(input_vector)
+			move()
+			wall_slide_check()
+			submerged_check()
+			
 		WALL_SLIDE:
 			spriteAnimator.play("Wall Slide")
 			
@@ -89,6 +115,20 @@ func _physics_process(delta) -> void:
 			wall_slide_drop_check(delta)
 			move()
 			wall_detach(delta, wall_axis)
+			
+		KNOCKED_OUT:
+			apply_gravity(delta)
+			if Input.is_action_just_pressed("ui_up") && !Events.is_fading:
+				jump(JUMP_FORCE)
+				just_jumped = true
+				state = MOVE
+				gun.visible = true
+				gun.enabled = true
+				Music.fade_in()
+				spriteAnimator.play("Idle")
+			move()
+				
+			continue
 
 	
 	if Input.is_action_pressed("fire") and fireBulletTimer.time_left == 0:
@@ -121,6 +161,10 @@ func save() -> Dictionary:
 func misfire():
 	SoundFx.play("Step", .2)
 	fireBulletTimer.start()
+	
+func knock_out():
+	spriteAnimator.play("Knocked Out")
+	state = KNOCKED_OUT
 
 func fire_bullet():
 	var bullet = Utils.instance_scene_on_main(PlayerBullet, muzzle.global_position)
@@ -150,8 +194,13 @@ func get_input_vector() -> Vector2:
 	
 func apply_horizontal_force(input_vector, delta) -> void:
 	if input_vector.x != 0:
-		motion.x += input_vector.x * ACCELERATION * delta
-		motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
+		match state:
+			SUBMERGED:
+				motion.x += input_vector.x * (ACCELERATION * SUBMERGED_ACCELERATION) * delta
+				motion.x = clamp(motion.x, -MAX_SPEED * SUBMERGED_MAX_SPEED, MAX_SPEED * SUBMERGED_MAX_SPEED)
+			_:
+				motion.x += input_vector.x * ACCELERATION * delta
+				motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
 		
 func apply_friction(input_vector: Vector2) -> void:
 	if input_vector.x == 0 and is_on_floor():
@@ -170,15 +219,21 @@ func jump_check() -> void:
 		if Input.is_action_just_released("ui_up") and is_allowed_to_cancel_jump():
 # warning-ignore:integer_division
 			motion.y = -JUMP_FORCE/2
-		if Input.is_action_just_pressed("ui_up") and double_jump == true:
+		if Input.is_action_just_pressed("ui_up") \
+		and (PlayerStats.double_jump_unlocked and double_jump == true):
 			jump(JUMP_FORCE * .75)
 			double_jump = false
 			
 func jump(force):
 	SoundFx.play("Jump", rand_range(0.8, 1.1), -5)
 	Utils.instance_scene_on_main(JumpEffect, global_position)
-	motion.y = -force
 	snap_vector = Vector2.ZERO
+	
+	match state:
+		SUBMERGED:
+			motion.y = -force * SUBMERGED_JUMP_FORCE
+		_:
+			motion.y = -force
 
 func is_allowed_to_cancel_jump() -> bool:
 	# If the player has reached the tip of their jump or are falling, canceling
@@ -190,9 +245,18 @@ func is_allowed_to_cancel_jump() -> bool:
 
 func apply_gravity(delta):
 	if not is_on_floor():
-		motion.y += GRAVITY * delta
-		motion.y = min(motion.y, JUMP_FORCE)
-		
+		match state:
+			MOVE:
+				motion.y += GRAVITY * delta
+				motion.y = min(motion.y, JUMP_FORCE)
+			SUBMERGED:
+				if Input.is_action_pressed("ui_down"):
+					motion.y += GRAVITY * SUBMERGED_SINKING_GRAVITY * delta
+					motion.y = min(motion.y, JUMP_FORCE * SUBMERGED_SINKING_GRAVITY)
+				else:	
+					motion.y += GRAVITY * SUBMERGED_GRAVITY * delta
+					motion.y = min(motion.y, JUMP_FORCE * SUBMERGED_GRAVITY)
+			
 func update_animations(input_vector: Vector2) -> void:
 	var facing: = sign(get_local_mouse_position().x)
 	if facing != 0:
@@ -232,10 +296,23 @@ func move() -> void:
 		position.x = last_position.x
 
 func wall_slide_check():
-	if not is_on_floor() and is_on_wall():
+	if PlayerStats.wall_slide_unlocked and (not is_on_floor() and is_on_wall()):
 		state = WALL_SLIDE
 		double_jump = true
 		create_dust_effect()
+		
+func submerged_check():
+	if waterDetector.get_overlapping_bodies().size() > 0:
+		waterEntryCollider.disabled = true
+		waterExitCollider.disabled = false
+		if state != SUBMERGED:
+			var effect = Utils.instance_scene_on_main(JumpEffect, global_position + Vector2(0, -8))
+			effect.scale *= 1.5
+		state = SUBMERGED
+	elif state == SUBMERGED:
+		waterEntryCollider.disabled = false
+		waterExitCollider.disabled = true
+		state = MOVE
 		
 func wall_slide_jump_check(wall_axis):
 	if Input.is_action_just_pressed("ui_up"):

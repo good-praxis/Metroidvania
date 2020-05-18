@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -22,6 +22,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "Jump"
@@ -40,7 +64,58 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-resource_name = "Run"
+resource_name = "Knocked Out"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 8, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/PlayerGun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/PlayerGun:enabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -73,8 +148,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "Wall Slide"
+[sub_resource type="Animation" id=5]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -89,7 +163,7 @@ tracks/0/keys = {
 "values": [ 10 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:visible")
@@ -121,6 +195,9 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 4, 5 )
+
 [node name="Player" type="KinematicBody2D" groups=[
 "Persists",
 "Player",
@@ -132,24 +209,26 @@ script = ExtResource( 1 )
 position = Vector2( 0, -12 )
 texture = ExtResource( 2 )
 hframes = 12
-frame = 10
+frame = 11
 
 [node name="PlayerGun" parent="Sprite" instance=ExtResource( 3 )]
 show_behind_parent = true
 position = Vector2( 1, 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -7 )
 shape = ExtResource( 5 )
 
 [node name="SpriteAnimator" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 1 )
 anims/Jump = SubResource( 2 )
-anims/Run = SubResource( 3 )
-"anims/Wall Slide" = SubResource( 4 )
+"anims/Knocked Out" = SubResource( 3 )
+anims/Run = SubResource( 4 )
+"anims/Wall Slide" = SubResource( 5 )
 
 [node name="BlinkAnimator" type="AnimationPlayer" parent="."]
-anims/Blink = SubResource( 5 )
+anims/Blink = SubResource( 6 )
 
 [node name="CameraFollow" type="RemoteTransform2D" parent="."]
 position = Vector2( 0, -8 )
@@ -165,6 +244,7 @@ wait_time = 0.25
 one_shot = true
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
+visible = false
 collision_layer = 4
 
 [node name="Collider" parent="Hurtbox" index="0"]
@@ -172,12 +252,26 @@ position = Vector2( 0, -7 )
 shape = ExtResource( 5 )
 
 [node name="PowerupDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PowerupDetector"]
 position = Vector2( 0, -7 )
 shape = ExtResource( 5 )
+
+[node name="WaterDetector" type="Area2D" parent="."]
+position = Vector2( 0, -3 )
+collision_layer = 0
+collision_mask = 64
+
+[node name="EntryCollider" type="CollisionShape2D" parent="WaterDetector"]
+position = Vector2( 0, -9 )
+shape = SubResource( 7 )
+
+[node name="ExitCollider" type="CollisionShape2D" parent="WaterDetector"]
+position = Vector2( 0, -3 )
+shape = SubResource( 7 )
 [connection signal="hit" from="Hurtbox" to="." method="_on_Hurtbox_hit"]
 [connection signal="area_entered" from="PowerupDetector" to="." method="_on_PowerupDetector_area_entered"]
 

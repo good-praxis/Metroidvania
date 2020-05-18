@@ -13,3 +13,4 @@ func random_pick(list: Array):
 	if list.size() > 0:
 		return list[randi()%list.size()]
 	print("List provided to random pick is empty")
+

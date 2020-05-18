@@ -13,7 +13,8 @@ var sounds = {
 	"Powerup" : load(sounds_path + "Powerup.wav"),
 	"Step" : load(sounds_path + "Step.wav"),
 	"Unpause" : load(sounds_path + "Unpause.wav"),
-	"Gurgle" : load(sounds_path + "Gurgle.wav")
+	"Gurgle" : load(sounds_path + "Gurgle.wav"),
+	"Falling": load(sounds_path + "Falling.wav")
 }
 
 onready var sound_players = get_children()

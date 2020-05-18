@@ -4,6 +4,8 @@ const DustEffect = preload("res://Effects/DustEffect.tscn")
 
 var PlayerStats = ResourceLoader.PlayerStats
 
+export (bool) var enabled: = true
+
 onready var smokeTimer = $SmokeTimer
 onready var smoke = $Sprite/Smoke
 
@@ -11,8 +13,9 @@ func _ready():
 	PlayerStats.connect("player_gun_broken", self, "_on_player_gun_broken")
 
 func _process(_delta):
-	var player: = get_parent()
-	rotation = player.get_local_mouse_position().angle()
+	if enabled:
+		var player: = get_parent()
+		rotation = player.get_local_mouse_position().angle()
 
 func _on_player_gun_broken(broken):
 	if broken:

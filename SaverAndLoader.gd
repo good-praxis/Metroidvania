@@ -4,11 +4,15 @@ var PlayerStats = ResourceLoader.PlayerStats
 
 var custom_data =  {
 	missiles_unlocked = false,
+	wall_slide_unlocked = false,
+	double_jump_unlocked = false,
 	boss_defeated = false,
 	gun_broken = false,
 	save_on_broken_save_station = false,
 	saved_health = PlayerStats.max_health,
-	level_01_cleared = false
+	elevator_cutscene_over = false,
+#	level_01_cleared = false,
+#	level_03_cleared = false
 }
 
 var is_loading := false

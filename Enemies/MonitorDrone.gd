@@ -13,7 +13,7 @@ onready var animationPlayer: = $AnimationPlayer
 onready var emoteTimer: = $EmoteTimer
 
 export(bool) var animated = false 
-export(String, "None", "GoRight", "ShootTarget") var animation 
+export(String, "None", "GoRight", "ShootTarget", "LovesPlayer") var animation 
 export(SPRITES) var sprite_id 
 
 	

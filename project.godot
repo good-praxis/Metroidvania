@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "",
-"class": "GitAPI",
-"language": "NativeScript",
-"path": "res://git_api.gdns"
-}, {
 "base": "Resource",
 "class": "MainInstances",
 "language": "GDScript",
@@ -35,7 +30,6 @@ _global_script_classes=[ {
 "path": "res://Player/Powerup.gd"
 } ]
 _global_script_class_icons={
-"GitAPI": "",
 "MainInstances": "",
 "MusicList": "",
 "PlayerStats": "",
@@ -44,7 +38,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Metroidvania"
+config/name="Root Access"
 run/main_scene="res://Menus/StartMenu.tscn"
 config/icon="res://icon.png"
 
@@ -68,7 +62,7 @@ window/stretch/aspect="keep"
 
 [gdnative]
 
-singletons=[ "res://git_api.gdnlib" ]
+singletons=[  ]
 
 [importer_defaults]
 
@@ -153,8 +147,10 @@ tmp_break={
 2d_physics/layer_4="EnemyHurtbox"
 2d_physics/layer_5="Brick"
 2d_physics/layer_6="Powerup"
+2d_physics/layer_7="Water"
 
 [rendering]
 
 quality/2d/use_pixel_snap=true
+quality/depth/hdr=false
 environment/default_environment="res://default_env.tres"

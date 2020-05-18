@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://World/SaveStation.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/Spikes.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/Door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://DoorConnections/02_link_03.tres" type="Resource" id=5]
+[ext_resource path="res://World/BlockDoor.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Levels/Level_03.gd" type="Script" id=7]
+
+[node name="Level_03" instance=ExtResource( 3 )]
+script = ExtResource( 7 )
+
+[node name="TileMap" parent="." index="0"]
+tile_data = PoolIntArray( 0, 5, 65546, 1, 5, 131081, 2, 5, 131081, 3, 5, 131077, 4, 5, 131077, 5, 5, 131077, 6, 5, 131081, 7, 5, 1, 8, 5, 131077, 9, 5, 131077, 10, 5, 1, 11, 5, 131081, 12, 5, 131077, 13, 5, 131077, 14, 5, 131077, 15, 5, 65544, 65536, 5, 65542, 65537, 5, 12, 65538, 5, 131073, 65539, 5, 13, 65540, 5, 13, 65541, 5, 5, 65542, 5, 13, 65543, 5, 5, 65544, 5, 13, 65545, 5, 131073, 65546, 5, 13, 65547, 5, 131073, 65548, 5, 5, 65549, 5, 13, 65550, 5, 6, 65551, 5, 65540, 131072, 5, 65536, 131073, 5, 65538, 131082, 7, 0, 131086, 5, 65536, 131087, 5, 65540, 196608, 5, 131072, 196609, 5, 65548, 196622, 5, 131072, 196623, 5, 65548, 262157, 7, 0, 262158, 7, 0, 327694, 7, 0, 393216, 5, 65546, 393217, 5, 2, 393225, 5, 65546, 393226, 5, 65544, 393229, 5, 65546, 393230, 5, 131081, 393231, 5, 65544, 458752, 5, 65536, 458753, 5, 131076, 458754, 5, 131081, 458755, 5, 131077, 458756, 5, 131077, 458757, 5, 1, 458758, 5, 131081, 458759, 5, 1, 458760, 5, 131081, 458761, 5, 131082, 458762, 5, 131080, 458763, 5, 131077, 458764, 5, 131077, 458765, 5, 131082, 458766, 5, 65537, 458767, 5, 65540, 524288, 5, 65536, 524289, 5, 65537, 524290, 5, 65537, 524291, 5, 65537, 524292, 5, 65537, 524293, 5, 65537, 524294, 5, 65537, 524295, 5, 65537, 524296, 5, 65537, 524297, 5, 65537, 524298, 5, 65537, 524299, 5, 65537, 524300, 5, 65537, 524301, 5, 65537, 524302, 5, 65537, 524303, 5, 65538, 589824, 5, 65542, 589825, 5, 65537, 589826, 5, 65537, 589827, 5, 65537, 589828, 5, 65537, 589829, 5, 65537, 589830, 5, 65537, 589831, 5, 65537, 589832, 5, 65537, 589833, 5, 65537, 589834, 5, 65537, 589835, 5, 65537, 589836, 5, 65537, 589837, 5, 65537, 589838, 5, 65537, 589839, 5, 65540, 655360, 5, 131072, 655361, 5, 13, 655362, 5, 13, 655363, 5, 5, 655364, 5, 13, 655365, 5, 5, 655366, 5, 13, 655367, 5, 5, 655368, 5, 13, 655369, 5, 131073, 655370, 5, 5, 655371, 5, 131073, 655372, 5, 13, 655373, 5, 5, 655374, 5, 131073, 655375, 5, 131074 )
+
+[node name="SaveStation" parent="." index="1" instance=ExtResource( 1 )]
+position = Vector2( 80, 112 )
+
+[node name="SpikeCollection" type="Node2D" parent="." index="2"]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Spikes" parent="SpikeCollection" index="0" instance=ExtResource( 2 )]
+position = Vector2( 176, 96 )
+
+[node name="Spikes2" parent="SpikeCollection" index="1" instance=ExtResource( 2 )]
+position = Vector2( 192, 96 )
+
+[node name="Door" parent="." index="3" instance=ExtResource( 4 )]
+position = Vector2( 8, 80 )
+scale = Vector2( -1, 1 )
+connection = ExtResource( 5 )
+new_level_path = "res://Levels/Level_02.tscn"
+
+[node name="Door2" parent="." index="4" instance=ExtResource( 4 )]
+position = Vector2( 248, 80 )
+
+[node name="BlockDoor" parent="." index="5" instance=ExtResource( 6 )]
+position = Vector2( 224, 64 )
