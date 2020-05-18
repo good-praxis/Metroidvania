@@ -21,7 +21,8 @@ func _ready():
 		SaverAndLoader.load_game()
 		SaverAndLoader.is_loading = false
 		
-	if MainInstances.DebugHelper != null:
+	var DebugHelper = MainInstances.DebugHelper
+	if DebugHelper != null:
 		DebugHelper.prime_player()
 	
 	MainInstances.Player.connect("hit_door", self, "_on_Player_hit_door")

@@ -45,7 +45,7 @@ config/icon="res://icon.png"
 [autoload]
 
 ResourceLoader="*res://ResourceLoader.gd"
-DebugHelper="*res://DebugHelper.gd"
+DebugHelper="*res://DebugHelper.tscn"
 Events="*res://Events.gd"
 SaverAndLoader="*res://SaverAndLoader.gd"
 SoundFx="*res://Music and Sounds/SoundFX.tscn"
