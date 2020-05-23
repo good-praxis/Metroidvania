@@ -1,6 +1,6 @@
 extends Area2D
 
-export(Resource) var connection = null
+export(int, -1, 4) var channel = -1
 export(String, FILE, "*.tscn") var new_level_path: = ""
 export(bool) var oneshot = false
 

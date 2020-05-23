@@ -8,6 +8,9 @@ func _ready():
 	var parent = get_parent()
 	if parent is WORLD:
 		parent.currentLevel = self
+		
+func _world_ready():
+	pass
 
 func save() -> Dictionary:
 	var save_dictionary: = {

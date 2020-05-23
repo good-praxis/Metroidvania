@@ -5,14 +5,6 @@ var PlayerStats: PlayerStats = ResourceLoader.PlayerStats
 
 onready var currentLevel = get_current_level()
 
-func __dbg_level_switch(door):
-	if MainInstances.DebugHelper != null:
-		var DebugHelper = MainInstances.DebugHelper
-		var next_level = door.new_level_path.substr(13)
-		next_level = next_level.substr(0, len(next_level) - 5)
-		var info = "Transitioning from %s to %s" % [currentLevel.name, next_level]
-		DebugHelper.info(info)
-
 func _ready():
 	VisualServer.set_default_clear_color(Color.black)
 	Music.list_play()
@@ -32,8 +24,6 @@ func change_levels(door):
 	if currentLevel == null:
 		push_warning("No current level found in World.gd")
 		
-	__dbg_level_switch(door)
-		
 	if door.new_level_path == "":
 		Events.emit_signal("screen_fade_out", 1)
 		PlayerStats.emit_signal("player_died")
@@ -44,14 +34,15 @@ func change_levels(door):
 	var NewLevel = load(door.new_level_path)
 	var newLevel = NewLevel.instance()
 	add_child(newLevel)
-	var newDoor = get_door_with_connection(door, door.connection)
+	var newDoor = get_door_on_channel(door, door.channel)
 	var exit_position = newDoor.position - offset
 	newLevel.position = door.position - exit_position
+	newLevel._world_ready()
 	
-func get_door_with_connection(notDoor, connection):
+func get_door_on_channel(notDoor, channel):
 	var doors = get_tree().get_nodes_in_group("Door")
 	for door in doors:
-		if door.connection == connection and door != notDoor:
+		if door.channel == channel and door != notDoor:
 			return door
 	return null
 
