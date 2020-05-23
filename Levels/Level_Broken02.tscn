@@ -28,10 +28,12 @@ position = Vector2( 64, 144 )
 
 [node name="PlantEnemy2" parent="." index="4" instance=ExtResource( 4 )]
 position = Vector2( 128, 144 )
+sleep = true
 
 [node name="PlantEnemy3" parent="." index="5" instance=ExtResource( 4 )]
 position = Vector2( 96, 32 )
 rotation = -3.14159
+sleep = true
 
 [node name="PlantEnemy4" parent="." index="6" instance=ExtResource( 4 )]
 position = Vector2( 160, 32 )
