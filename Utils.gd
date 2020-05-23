@@ -14,3 +14,7 @@ func random_pick(list: Array):
 		return list[randi()%list.size()]
 	print("List provided to random pick is empty")
 
+func get_level_name():
+	var levels: = get_tree().get_nodes_in_group("Level")
+	var level = levels[0]
+	return level.name
