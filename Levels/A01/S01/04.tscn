@@ -1,14 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://World/Door.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=2]
-[ext_resource path="res://DoorConnections/BrokenSSR_link_GunRepair00.tres" type="Resource" id=3]
-[ext_resource path="res://World/WaterTileMap.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Enemies/CrawlingEnemy.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Enemies/Fishyfishy.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Enemies/Egg.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/WaterTileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enemies/CrawlingEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Levels/#Level_AXX_SXX_XX.tscn" type="PackedScene" id=4]
 
-[node name="Level_GunRepair00" instance=ExtResource( 2 )]
+[node name="Level_A01_S01_04" instance=ExtResource( 4 )]
 
 [node name="TileMap" parent="." index="0"]
 tile_data = PoolIntArray( -131069, 5, 65546, -131068, 5, 131081, -131067, 5, 1, -131066, 5, 1, -131065, 5, 131081, -131064, 5, 1, -131063, 5, 131077, -131062, 5, 131081, -131061, 5, 131077, -131060, 5, 131077, -131059, 5, 131077, -131058, 5, 131081, -131057, 5, 131081, -131056, 5, 131081, -131055, 5, 1, -131054, 5, 131081, -131053, 5, 131077, -131052, 5, 131081, -131051, 5, 131077, -131050, 5, 131077, -131049, 5, 65544, -65533, 5, 65542, -65532, 5, 4, -65531, 5, 5, -65530, 5, 131073, -65529, 5, 5, -65528, 5, 13, -65527, 5, 131073, -65526, 5, 5, -65525, 5, 131073, -65524, 5, 131073, -65523, 5, 13, -65522, 5, 5, -65521, 5, 13, -65520, 5, 131073, -65519, 5, 5, -65518, 5, 5, -65517, 5, 13, -65516, 5, 13, -65515, 5, 13, -65514, 5, 6, -65513, 5, 65538, 0, 5, 65546, 1, 5, 131081, 2, 5, 131077, 3, 5, 131078, 4, 5, 65540, 22, 5, 65536, 23, 5, 65538, 65536, 5, 65536, 65537, 5, 65537, 65538, 5, 65537, 65539, 5, 65537, 65540, 5, 65538, 65546, 7, 0, 65547, 7, 0, 65548, 7, 0, 65558, 5, 65542, 65559, 5, 65538, 131072, 5, 131072, 131073, 5, 5, 131074, 5, 13, 131075, 5, 5, 131076, 5, 65548, 131079, 5, 0, 131080, 5, 2, 131082, 7, 0, 131094, 5, 65536, 131095, 5, 65538, 196615, 5, 65542, 196616, 5, 65538, 196630, 5, 65550, 196631, 5, 131074, 262151, 5, 65542, 262152, 5, 65540, 327680, 5, 0, 327681, 5, 131077, 327682, 5, 131081, 327683, 5, 131077, 327684, 5, 1, 327685, 5, 1, 327686, 5, 131081, 327687, 5, 131082, 327688, 5, 65540, 393216, 5, 65542, 393217, 5, 65537, 393218, 5, 65537, 393219, 5, 65537, 393220, 5, 65537, 393221, 5, 65537, 393222, 5, 65537, 393223, 5, 65537, 393224, 5, 131080, 393225, 5, 131081, 393226, 5, 131077, 393227, 5, 131077, 393228, 5, 131081, 393229, 5, 1, 393230, 5, 131077, 393231, 5, 131081, 393232, 5, 131077, 393233, 5, 131081, 393234, 5, 131077, 393235, 5, 1, 393236, 5, 1, 393237, 5, 131081, 393238, 5, 131077, 393239, 5, 2, 458752, 5, 131072, 458753, 5, 13, 458754, 5, 131073, 458755, 5, 131073, 458756, 5, 5, 458757, 5, 13, 458758, 5, 5, 458759, 5, 13, 458760, 5, 131073, 458761, 5, 131073, 458762, 5, 131073, 458763, 5, 5, 458764, 5, 5, 458765, 5, 13, 458766, 5, 13, 458767, 5, 13, 458768, 5, 131073, 458769, 5, 131073, 458770, 5, 13, 458771, 5, 13, 458772, 5, 131073, 458773, 5, 13, 458774, 5, 13, 458775, 5, 131074 )
@@ -16,24 +13,15 @@ tile_data = PoolIntArray( -131069, 5, 65546, -131068, 5, 131081, -131067, 5, 1, 
 [node name="Door" parent="." index="1" instance=ExtResource( 1 )]
 position = Vector2( 8, 64 )
 scale = Vector2( -1, 1 )
-connection = ExtResource( 3 )
-new_level_path = "res://Levels/Level_BrokenSSR.tscn"
+channel = 3
+new_level_path = "res://Levels/A01/S01/02_SSR.tscn"
 
-[node name="WaterTileMap" parent="." index="2" instance=ExtResource( 4 )]
+[node name="WaterTileMap" parent="." index="2" instance=ExtResource( 2 )]
 tile_data = PoolIntArray( 65548, 7, 0, 131081, 5, 0, 131082, 5, 131077, 131083, 5, 1, 131084, 5, 131081, 131085, 5, 131077, 131086, 5, 131077, 131087, 5, 131077, 131088, 5, 131077, 131089, 5, 1, 131090, 5, 131081, 131091, 5, 131081, 131092, 5, 1, 131093, 5, 2, 196617, 5, 65542, 196618, 5, 65537, 196619, 5, 65537, 196620, 5, 65537, 196621, 5, 65537, 196622, 5, 65537, 196623, 5, 65537, 196624, 5, 65537, 196625, 5, 65537, 196626, 5, 65537, 196627, 5, 65537, 196628, 5, 65537, 196629, 5, 65540, 262153, 5, 65536, 262154, 5, 65537, 262155, 5, 65537, 262156, 5, 65537, 262157, 5, 65537, 262158, 5, 65537, 262159, 5, 65537, 262160, 5, 65537, 262161, 5, 65537, 262162, 5, 65537, 262163, 5, 65537, 262164, 5, 65537, 262165, 5, 131076, 262166, 5, 1, 262167, 5, 2, 327689, 5, 131072, 327690, 5, 5, 327691, 5, 131073, 327692, 5, 13, 327693, 5, 13, 327694, 5, 13, 327695, 5, 5, 327696, 5, 5, 327697, 5, 5, 327698, 5, 5, 327699, 5, 13, 327700, 5, 5, 327701, 5, 13, 327702, 5, 5, 327703, 5, 65548 )
 
-[node name="CrawlingEnemy" parent="." index="3" instance=ExtResource( 5 )]
+[node name="CrawlingEnemy" parent="." index="3" instance=ExtResource( 3 )]
 position = Vector2( 288, 0 )
 rotation = 3.14159
 
 [node name="Door2" parent="." index="4" instance=ExtResource( 1 )]
 position = Vector2( 376, 80 )
-
-[node name="FishyFishy" parent="." index="5" instance=ExtResource( 6 )]
-position = Vector2( 275, 52 )
-
-[node name="Egg" parent="." index="6" instance=ExtResource( 7 )]
-position = Vector2( 48, 80 )
-
-[node name="Egg2" parent="." index="7" instance=ExtResource( 7 )]
-position = Vector2( 128, 32 )

@@ -1,40 +1,37 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://World/Elevator.tscn" type="PackedScene" id=1]
-[ext_resource path="res://World/BrokenSaveStation.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=3]
-[ext_resource path="res://DoorConnections/Broken01_link_BrokenSSR.tres" type="Resource" id=4]
-[ext_resource path="res://World/Door.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Enemies/CrawlingEnemy.tscn" type="PackedScene" id=6]
-[ext_resource path="res://DoorConnections/BrokenSSR_link_Broken02.tres" type="Resource" id=7]
-[ext_resource path="res://DoorConnections/BrokenSSR_link_GunRepair00.tres" type="Resource" id=8]
+[ext_resource path="res://World/Door.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/CrawlingEnemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Levels/#Level_AXX_SXX_XX.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/BrokenSaveStation.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World/Elevator.tscn" type="PackedScene" id=5]
 
-[node name="Level_BrokenSSR" instance=ExtResource( 3 )]
+[node name="Level_A01_S01_02_SSR" instance=ExtResource( 3 )]
 
 [node name="TileMap" parent="." index="0"]
 tile_data = PoolIntArray( -393211, 0, 4, -393210, 0, 196609, -393209, 0, 196609, -393208, 0, 196609, -393207, 0, 196609, -393206, 0, 196609, -393205, 0, 196609, -393204, 0, 196609, -393203, 0, 196609, -393202, 0, 196609, -393201, 0, 196610, -327676, 0, 0, -327675, 0, 131079, -327674, 5, 65546, -327673, 5, 1, -327672, 5, 131077, -327671, 5, 131077, -327670, 5, 131081, -327669, 5, 1, -327668, 5, 131081, -327667, 5, 131081, -327666, 5, 1, -327665, 5, 65544, -262141, 0, 0, -262140, 0, 131078, -262139, 0, 65538, -262138, 5, 65542, -262137, 5, 65537, -262136, 5, 4, -262135, 5, 13, -262134, 5, 13, -262133, 5, 13, -262132, 5, 5, -262131, 5, 14, -262130, 5, 65537, -262129, 5, 65540, -196606, 0, 0, -196605, 0, 131078, -196604, 0, 65537, -196603, 0, 65538, -196602, 5, 65550, -196601, 5, 131073, -196600, 5, 65548, -196598, 7, 1, -196597, 7, 2, -196596, 7, 3, -196595, 5, 131072, -196594, 5, 131073, -196593, 5, 131074, -131070, 0, 65536, -131069, 0, 65537, -131068, 0, 65537, -131067, 0, 65538, -131066, 4, 16, -131062, 7, 65537, -131061, 7, 65538, -131060, 7, 65539, -65536, 0, 196608, -65535, 0, 196609, -65534, 0, 196614, -65533, 0, 131073, -65532, 0, 131073, -65531, 0, 131074, -65530, 4, 131088, -65526, 7, 65537, -65525, 7, 65538, -65524, 7, 65539, 0, 5, 0, 1, 5, 1, 2, 5, 131081, 3, 5, 131077, 4, 5, 131077, 5, 5, 131081, 6, 5, 131077, 7, 5, 1, 8, 5, 65544, 10, 7, 65537, 11, 7, 65538, 12, 7, 65539, 13, 5, 65546, 14, 5, 1, 15, 5, 2, 65536, 5, 65542, 65537, 5, 65537, 65538, 5, 65537, 65539, 5, 12, 65540, 5, 5, 65541, 5, 13, 65542, 5, 13, 65543, 5, 13, 65544, 5, 131074, 65546, 7, 65537, 65547, 7, 65538, 65548, 7, 65539, 65549, 5, 65542, 65550, 5, 65537, 65551, 5, 65540, 131072, 5, 65550, 131073, 5, 5, 131074, 5, 131073, 131075, 5, 65548, 131082, 7, 65537, 131083, 7, 65538, 131084, 7, 65539, 131085, 5, 65550, 131086, 5, 131073, 131087, 5, 65548, 196618, 7, 65537, 196619, 7, 65538, 196620, 7, 65539, 262154, 7, 65537, 262155, 7, 65538, 262156, 7, 65539, 327680, 5, 0, 327681, 5, 1, 327682, 5, 131081, 327683, 5, 131081, 327684, 5, 131081, 327685, 5, 131077, 327686, 5, 1, 327687, 5, 131077, 327688, 5, 1, 327689, 5, 65544, 327690, 7, 458753, 327691, 7, 458754, 327692, 7, 458755, 327693, 5, 65546, 327694, 5, 1, 327695, 5, 65544, 393216, 5, 131072, 393217, 5, 131073, 393218, 5, 131073, 393219, 5, 13, 393220, 5, 13, 393221, 5, 13, 393222, 5, 5, 393223, 5, 13, 393224, 5, 14, 393225, 5, 131076, 393226, 5, 131077, 393227, 5, 1, 393228, 5, 131077, 393229, 5, 131082, 393230, 5, 65537, 393231, 5, 65538, 458752, 0, 0, 458753, 0, 1, 458754, 0, 1, 458755, 0, 1, 458756, 0, 1, 458757, 0, 1, 458758, 0, 1, 458759, 0, 2, 458760, 5, 65550, 458761, 5, 131073, 458762, 5, 131073, 458763, 5, 5, 458764, 5, 5, 458765, 5, 5, 458766, 5, 5, 458767, 5, 65548, 524288, 0, 131072, 524289, 0, 65542, 524290, 0, 65537, 524291, 0, 65537, 524292, 0, 65537, 524293, 0, 65537, 524294, 0, 65537, 524295, 0, 131077, 524296, 0, 1, 524297, 0, 1, 524298, 0, 1, 524299, 0, 1, 524300, 0, 1, 524301, 0, 1, 524302, 0, 1, 524303, 0, 2, 589825, 0, 131072, 589826, 0, 131073, 589827, 0, 131073, 589828, 0, 131073, 589829, 0, 131073, 589830, 0, 131073, 589831, 0, 131073, 589832, 0, 131073, 589833, 0, 131073, 589834, 0, 131073, 589835, 0, 131073, 589836, 0, 131073, 589837, 0, 131073, 589838, 0, 131073, 589839, 0, 131074 )
 
-[node name="BrokenSaveStation" parent="." index="1" instance=ExtResource( 2 )]
+[node name="BrokenSaveStation" parent="." index="1" instance=ExtResource( 4 )]
 position = Vector2( 96, 80 )
 
-[node name="Elevator" parent="." index="2" instance=ExtResource( 1 )]
+[node name="Elevator" parent="." index="2" instance=ExtResource( 5 )]
 position = Vector2( 160, 32 )
 
-[node name="Door" parent="." index="3" instance=ExtResource( 5 )]
+[node name="Door" parent="." index="3" instance=ExtResource( 1 )]
 position = Vector2( 8, 64 )
 scale = Vector2( -1, 1 )
-connection = ExtResource( 4 )
-new_level_path = "res://Levels/Level_Broken01.tscn"
+channel = 2
+new_level_path = "res://Levels/A01/S01/01.tscn"
 
-[node name="Door2" parent="." index="4" instance=ExtResource( 5 )]
+[node name="Door2" parent="." index="4" instance=ExtResource( 1 )]
 position = Vector2( 248, 64 )
-connection = ExtResource( 7 )
-new_level_path = "res://Levels/Level_Broken02.tscn"
+channel = 1
+new_level_path = "res://Levels/A01/S01/03.tscn"
 
-[node name="Door3" parent="." index="5" instance=ExtResource( 5 )]
+[node name="Door3" parent="." index="5" instance=ExtResource( 1 )]
 position = Vector2( 248, -16 )
-connection = ExtResource( 8 )
-new_level_path = "res://Levels/Level_GunRepair00.tscn"
+channel = 3
+new_level_path = "res://Levels/A01/S01/04.tscn"
 
-[node name="CrawlingEnemy" parent="." index="6" instance=ExtResource( 6 )]
+[node name="CrawlingEnemy" parent="." index="6" instance=ExtResource( 2 )]
 position = Vector2( 128, 0 )

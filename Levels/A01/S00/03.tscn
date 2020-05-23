@@ -1,19 +1,17 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://DoorConnections/Chase01_link_ChaseSSR.tres" type="Resource" id=1]
-[ext_resource path="res://DoorConnections/ElevatorSSR_link_Chase01.tres" type="Resource" id=2]
 [ext_resource path="res://World/Trigger.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Enemies/BossEnemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Door.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Levels/Level_Chase01.gd" type="Script" id=7]
+[ext_resource path="res://Levels/#Level_AXX_SXX_XX.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Levels/A01/S00/03.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 7.51303 )
 
-[node name="Level_03" instance=ExtResource( 6 )]
+[node name="Level_A00_S00_03" instance=ExtResource( 6 )]
 script = ExtResource( 7 )
 
 [node name="TileMap" parent="." index="0"]
@@ -22,8 +20,8 @@ tile_data = PoolIntArray( -720894, 0, 3, -655358, 0, 65539, -655257, 0, 0, -6552
 [node name="Door" parent="." index="1" instance=ExtResource( 5 )]
 position = Vector2( 12, 112 )
 scale = Vector2( -1, 1 )
-connection = ExtResource( 2 )
-new_level_path = "res://Levels/Level_ElevatorSSR.tscn"
+channel = 2
+new_level_path = "res://Levels/A01/S00/02_SSR.tscn"
 
 [node name="FadeOutTrigger" parent="." index="2" instance=ExtResource( 3 )]
 position = Vector2( 135, 72 )
@@ -46,8 +44,8 @@ ACCELERATION = 100
 
 [node name="Door2" parent="." index="5" instance=ExtResource( 5 )]
 position = Vector2( 1752, 64 )
-connection = ExtResource( 1 )
-new_level_path = "res://Levels/Level_ChaseSSR.tscn"
+channel = 1
+new_level_path = "res://Levels/A01/S00/04_SSR.tscn"
 [connection signal="area_triggered" from="FadeOutTrigger" to="." method="_on_FadeOutTrigger_area_triggered"]
 [connection signal="area_triggered" from="BossTrigger" to="." method="_on_BossTrigger_area_triggered"]
 

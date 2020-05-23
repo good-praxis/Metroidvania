@@ -1,19 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Enemies/PlantEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Door.tscn" type="PackedScene" id=2]
-[ext_resource path="res://DoorConnections/Chase01_link_ChaseSSR.tres" type="Resource" id=3]
-[ext_resource path="res://Levels/Level_ChaseSSR.gd" type="Script" id=4]
+[ext_resource path="res://Levels/A01/S00/04_SSR.gd" type="Script" id=4]
 [ext_resource path="res://World/Trigger.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/BrokenSaveStation.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Levels/#Level_AXX_SXX_XX.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/TileMap.tscn" type="PackedScene" id=8]
-[ext_resource path="res://DoorConnections/ChaseSSR_link_Broken00.tres" type="Resource" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 16 )
 
-[node name="Level_ChaseSSR" instance=ExtResource( 7 )]
+[node name="Level_A00_S00_04_SSR" instance=ExtResource( 7 )]
 script = ExtResource( 4 )
 
 [node name="TileMap" parent="." index="0"]
@@ -22,13 +20,13 @@ tile_data = PoolIntArray( -131072, 0, 0, -131071, 0, 1, -131070, 0, 1, -131069, 
 [node name="Door" parent="." index="1" instance=ExtResource( 2 )]
 position = Vector2( 8, 80 )
 scale = Vector2( -1, 1 )
-connection = ExtResource( 3 )
-new_level_path = "res://Levels/Level_Chase01.tscn"
+channel = 1
+new_level_path = "res://Levels/A01/S00/03.tscn"
 
 [node name="Door2" parent="." index="2" instance=ExtResource( 2 )]
 position = Vector2( 216, 64 )
-connection = ExtResource( 9 )
-new_level_path = "res://Levels/Level_Broken00.tscn"
+channel = 2
+new_level_path = "res://Levels/A01/S01/00.tscn"
 
 [node name="Trigger" parent="." index="3" instance=ExtResource( 5 )]
 position = Vector2( 16, 80 )

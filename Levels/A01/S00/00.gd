@@ -3,10 +3,9 @@ extends "res://Levels/Level.gd"
 var PlayerStats: PlayerStats = ResourceLoader.PlayerStats
 var MainInstances: MainInstances = ResourceLoader.MainInstances
 
-export (Resource) var connection = null
-export (String) var new_level_path = "res://Levels/Level_Elevator01.tscn"
+export(String, FILE, "*.tscn")  var new_level_path = "res://Levels/Level_Elevator01.tscn"
 
-
+var channel: = 0 #Door Channel
 
 
 func _on_GravityTrigger_area_triggered():
