@@ -243,7 +243,7 @@ func is_allowed_to_cancel_jump() -> bool:
 func apply_gravity(delta):
 	if not is_on_floor():
 		match state:
-			MOVE:
+			MOVE, KNOCKED_OUT:
 				motion.y += GRAVITY * delta
 				motion.y = min(motion.y, JUMP_FORCE)
 			SUBMERGED:
