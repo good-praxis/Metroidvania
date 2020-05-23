@@ -11,8 +11,6 @@ func _ready():
 	dead_check()
 	if dead:
 		anim.play("Dead")
-	
-	print(id)
 
 func dead_check():
 	dead = SaverAndLoader.custom_data.get(id, dead)
