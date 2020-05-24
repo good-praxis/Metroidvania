@@ -2,7 +2,7 @@ extends "res://Enemies/Enemy.gd"
 
 enum DIRECTION {LEFT = -1, RIGHT = 1}
 
-export(DIRECTION) var SWIMMING_DIRECTION = DIRECTION.RIGHT
+export(DIRECTION) var SWIMMING_DIRECTION = DIRECTION.RIGHT setget set_direction
 export(float) var timeScale = 2
 
 onready var sprite: = $Sprite
@@ -24,6 +24,15 @@ func _physics_process(delta):
 	motion.y = MAX_SPEED * sin(t) 
 	
 	motion = move_and_slide_with_snap(motion, Vector2.DOWN * 4, Vector2.UP, true, 4, deg2rad(46))
+
+func set_direction(new_direction):
+	SWIMMING_DIRECTION = new_direction
+	if mounted():
+		sprite.scale.x = new_direction
+		wallCollide.scale.x = new_direction
+
+func mounted() -> bool:
+	return wallCollide and sprite
 
 func turn():
 	SWIMMING_DIRECTION *= -1
