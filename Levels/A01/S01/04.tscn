@@ -25,3 +25,5 @@ rotation = 3.14159
 
 [node name="Door2" parent="." index="4" instance=ExtResource( 1 )]
 position = Vector2( 376, 80 )
+channel = 1
+new_level_path = "res://Levels/A01/S01/05.tscn"

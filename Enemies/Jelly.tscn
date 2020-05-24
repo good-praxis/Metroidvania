@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/jelly.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/Jelly.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Anim"
+length = 2.0
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 6.99999
+height = 8.00003
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 9.0
+height = 0.0
+
+[node name="Jelly" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+hframes = 4
+
+[node name="AnimationPlayer" parent="." index="2"]
+autoplay = "Anim"
+anims/Anim = SubResource( 1 )
+
+[node name="Collider" parent="Hurtbox" index="0"]
+position = Vector2( 0, -2 )
+rotation = -1.57079
+shape = SubResource( 2 )
+
+[node name="EnemyStats" parent="." index="4"]
+MAX_HEALTH = 5
+
+[node name="Collider" parent="Hitbox" index="0"]
+position = Vector2( 0, 2 )
+shape = SubResource( 3 )
+
+[node name="WallCollide" type="RayCast2D" parent="." index="6"]
+enabled = true
+cast_to = Vector2( 0, -20 )
+collision_mask = 2
+
+[editable path="Hurtbox"]
+
+[editable path="Hitbox"]
