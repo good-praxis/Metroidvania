@@ -45,11 +45,11 @@ config/icon="res://icon.png"
 [autoload]
 
 ResourceLoader="*res://ResourceLoader.gd"
+Music="*res://Music and Sounds/Music.tscn"
+SoundFx="*res://Music and Sounds/SoundFX.tscn"
 DebugHelper="*res://DebugHelper.tscn"
 Events="*res://Events.gd"
 SaverAndLoader="*res://SaverAndLoader.gd"
-SoundFx="*res://Music and Sounds/SoundFX.tscn"
-Music="*res://Music and Sounds/Music.tscn"
 Utils="*res://Utils.gd"
 
 [display]

@@ -6,3 +6,4 @@
 script = ExtResource( 1 )
 enabled = true
 music_mute = true
+sfx_mute = true

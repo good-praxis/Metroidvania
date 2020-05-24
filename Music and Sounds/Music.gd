@@ -58,9 +58,6 @@ func fade_in(duration = 3.0):
 		tween.interpolate_property(musicPlayer, "volume_db", quiet_db, working_db, duration,Tween.TRANS_SINE, Tween.EASE_IN)
 		tween.start()
 		
-func mute():
-	muted = true
-
 
 func _on_AudioStreamPlayer_finished():
 	list_play()

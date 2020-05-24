@@ -2,6 +2,8 @@ extends Node
 
 var sounds_path = "res://Music and Sounds/"
 
+var muted: = false
+
 var sounds = {
 	"Bullet" : load(sounds_path + "Bullet.wav"),
 	"Click" : load(sounds_path + "Click.wav"),
@@ -20,6 +22,9 @@ var sounds = {
 onready var sound_players = get_children()
 
 func play(sound_string, pitch_scale = 1, volume_db = 0):
+	if muted:
+		return
+	
 	playAndReturn(sound_string, pitch_scale, volume_db)
 	return
 	
@@ -29,6 +34,10 @@ func playAndReturn(sound_string, pitch_scale = 1, volume_db = 0):
 			soundPlayer.stream = sounds[sound_string]
 			soundPlayer.pitch_scale = pitch_scale
 			soundPlayer.volume_db = volume_db
+			
+			if muted:
+				return soundPlayer
+				
 			soundPlayer.play()
 			return soundPlayer
 	print("Too many sounds playing at once!")
