@@ -19,11 +19,13 @@ export (int) var JUMP_FORCE: = 128
 export (int) var MAX_SLOPE_ANGLE: = 46
 export (int) var BULLET_SPEED: = 250
 export (int) var MISSILE_BULLET_SPEED: = 150
+export (int) var KNOCKBACK: = 30
 
 export (float) var SUBMERGED_ACCELERATION: = 1.5
 export (float) var SUBMERGED_MAX_SPEED: = .7
 export (float) var SUBMERGED_JUMP_FORCE: = .5
 export (float) var SUBMERGED_GRAVITY: = .2
+export (float) var SUBMERGED_FRICTION: = .01
 export (float) var SUBMERGED_SINKING_GRAVITY: = .4
 
 enum {
@@ -38,7 +40,9 @@ var invincible: = false setget set_invincible
 var motion: = Vector2.ZERO
 var snap_vector: = Vector2.ZERO
 var just_jumped: = false
+var just_shot: = false
 var double_jump: = true
+var knocked_back: = false
 
 onready var sprite: = $Sprite
 onready var spriteAnimator: = $SpriteAnimator
@@ -78,6 +82,17 @@ func _exit_tree():
 
 func _physics_process(delta) -> void:
 	just_jumped = false
+	just_shot = false
+	
+	if Input.is_action_pressed("fire") and fireBulletTimer.time_left == 0:
+		if PlayerStats.gun_broken:
+			misfire()
+		else:	
+			fire_bullet()
+	if Input.is_action_just_pressed("fire_missile") and fireBulletTimer.time_left == 0:
+		if PlayerStats.missiles > 0 and PlayerStats.missiles_unlocked:
+			fire_missile()
+			PlayerStats.missiles -= 1
 	
 	match state:
 		MOVE:
@@ -99,6 +114,7 @@ func _physics_process(delta) -> void:
 			update_snap_vector()
 			jump_check()
 			apply_gravity(delta)
+			apply_knockback()
 			update_animations(input_vector)
 			move()
 			wall_slide_check()
@@ -129,17 +145,6 @@ func _physics_process(delta) -> void:
 			move()
 				
 			continue
-
-	
-	if Input.is_action_pressed("fire") and fireBulletTimer.time_left == 0:
-		if PlayerStats.gun_broken:
-			misfire()
-		else:	
-			fire_bullet()
-	if Input.is_action_just_pressed("fire_missile") and fireBulletTimer.time_left == 0:
-		if PlayerStats.missiles > 0 and PlayerStats.missiles_unlocked:
-			fire_missile()
-			PlayerStats.missiles -= 1
 			
 		
 	
@@ -169,6 +174,8 @@ func fire_bullet():
 	bullet.velocity.x *= sprite.scale.x
 	bullet.rotation = bullet.velocity.angle()
 	fireBulletTimer.start()
+	
+	just_shot = true
 	
 func fire_missile():
 	var missile = Utils.instance_scene_on_main(PlayerMissile, muzzle.global_position)
@@ -202,6 +209,10 @@ func apply_horizontal_force(input_vector, delta) -> void:
 func apply_friction(input_vector: Vector2) -> void:
 	if input_vector.x == 0 and is_on_floor():
 		motion.x = lerp(motion.x, 0, FRICTION)
+	
+	elif knocked_back:
+		motion = lerp(motion, Vector2(0, 0), SUBMERGED_FRICTION)
+		
 		
 func update_snap_vector() -> void:
 	if is_on_floor():
@@ -250,9 +261,18 @@ func apply_gravity(delta):
 				if Input.is_action_pressed("ui_down"):
 					motion.y += GRAVITY * SUBMERGED_SINKING_GRAVITY * delta
 					motion.y = min(motion.y, JUMP_FORCE * SUBMERGED_SINKING_GRAVITY)
+				elif knocked_back:
+					if motion.y < JUMP_FORCE * SUBMERGED_GRAVITY:
+						motion.y += GRAVITY * SUBMERGED_SINKING_GRAVITY * delta
 				else:	
 					motion.y += GRAVITY * SUBMERGED_GRAVITY * delta
 					motion.y = min(motion.y, JUMP_FORCE * SUBMERGED_GRAVITY)
+			
+func apply_knockback():
+	if just_shot:
+		knocked_back = true
+		motion += get_local_mouse_position().normalized() * -1 * KNOCKBACK
+		
 			
 func update_animations(input_vector: Vector2) -> void:
 	var facing: = sign(get_local_mouse_position().x)
@@ -278,6 +298,7 @@ func move() -> void:
 	
 	# Landing
 	if was_in_air and is_on_floor():
+		knocked_back = false
 		motion.x = last_motion.x
 		Utils.instance_scene_on_main(JumpEffect, global_position)		
 		double_jump = true
