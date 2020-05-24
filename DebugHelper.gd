@@ -7,11 +7,16 @@ export(bool) var enabled = false
 export(bool) var gun_broken = false
 export(bool) var double_jump_unlocked = true
 
+export(bool) var music_mute = false
 
 func _ready():
 	if not enabled:
 		info("Not enabled")
 		return
+	
+	if music_mute:
+		Music.mute()
+		info("Music muted")
 	
 	MainInstances.DebugHelper = self
 	info("Mounted")

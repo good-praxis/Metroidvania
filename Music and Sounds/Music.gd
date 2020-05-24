@@ -8,6 +8,8 @@ var normal_db: = 0 setget set_volume
 var working_db: = 0 
 var quiet_db: = -80
 
+var muted: = false
+
 onready var musicPlayer: = $AudioStreamPlayer
 onready var tween: = $Tween
 
@@ -29,6 +31,8 @@ func adjust_volume(diff):
 	self.normal_db = normal_db + diff
 
 func list_play():
+	if muted:
+		return
 	assert(music_list.list.size() > 0)
 	musicPlayer.stream = music_list.list[music_list_index]
 	musicPlayer.play()
@@ -41,18 +45,21 @@ func list_stop():
 	musicPlayer.stop()
 	
 func fade_out(duration = 5.0):
-	if not fade_in_process:
+	if not fade_in_process and not muted:
 		fade_in_process = true
 		tween.interpolate_property(musicPlayer, "volume_db", working_db, quiet_db, duration,Tween.TRANS_SINE, Tween.EASE_IN)
 		tween.start()
 		
 func fade_in(duration = 3.0):
-	if not fade_in_process:
+	if not fade_in_process and not muted:
 		fade_in_process = true
 		musicPlayer.volume_db = quiet_db
 		list_play()
 		tween.interpolate_property(musicPlayer, "volume_db", quiet_db, working_db, duration,Tween.TRANS_SINE, Tween.EASE_IN)
 		tween.start()
+		
+func mute():
+	muted = true
 
 
 func _on_AudioStreamPlayer_finished():
