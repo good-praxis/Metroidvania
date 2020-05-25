@@ -4,22 +4,22 @@
 [ext_resource path="res://World/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/UI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Levels/A01/S01/02_SSR.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Levels/A01/S01/05.tscn" type="PackedScene" id=5]
 
 [node name="World" type="Node"]
 script = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 41, 76 )
+position = Vector2( 713, 90 )
 
 [node name="CameraFollow" parent="Player" index="4"]
 remote_path = NodePath("../../Camera")
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
-position = Vector2( 41, 68 )
+position = Vector2( 713, 82 )
 
 [node name="UI" parent="." instance=ExtResource( 3 )]
 
-[node name="Level_BrokenSSR" parent="." instance=ExtResource( 5 )]
+[node name="Level_A01_S02_05" parent="." instance=ExtResource( 5 )]
 
 [editable path="Player"]
